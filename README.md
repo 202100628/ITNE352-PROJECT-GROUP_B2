@@ -55,17 +55,20 @@ Project Structure
 •	server.py: Manages client connections, fetches news data from the API, and handles client requests.
 •	client.py: Connects to the server, sends requests, and displays results to the user.
 •	ITNE352-PROJECT-GROUP-B2_Aysha_get_news. json: Sample JSON data file with retrieved news articles for testing.
+
 Contributing:
 1.	Fork the repository.
 2.	Create a new branch (git checkout -b feature/your-feature).
 3.	Commit your changes (git commit -am 'Add some feature').
 4.	Push to the branch (git push origin feature/your-feature).
 5.	Create a new Pull Request.
+
 License:
 This project is licensed under the MIT License.
+
 Contact:
 •	Instructor: Dr. Mohammed Almeer (malmeer@uob.edu.bh)
 •	Team Members:
-•	Member 1: 202100628@stu.uob.edu.bh
-•	Member 2: 202100815@stu.uob.edu.bh
+•	Maryam Mohammed: 202100628@stu.uob.edu.bh
+•	Aysha Mansoor: 202100815@stu.uob.edu.bh
 
