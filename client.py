@@ -18,37 +18,18 @@ def transmitRequest(socket_client, request_message):
     return json.loads(data_response.decode('utf-8'))
 
 def searchNewsHeadlines(socket_client):
-    while True:
-        print("Search headlines menu:")
-        print("1. Search for keywords")
-        print("2. Search by category")
-        print("3. Search by country")
-        print("4. List all new headlines")
-        print("5. Back to the main menu")
-        choice_option = input("Select an option: ")
+  while True:
+    print("Search headlines menu:")
+    print("1. Search for keywords")
+    print("2. Search by category")
+    print("3. Search by country")
+    print("4. List all new headlines")
+    print("5. Back to the main menu")
+    choice_option = input("Select an option: ")
 
-        if choice_option == '1':
-            search_keyword = input("Enter keyword: ")
-            query_params = {'q': search_keyword}
-            data_news = transmitRequest(socket_client, f'get_news|everything|{json.dumps(query_params)}')
-            displayResults(data_news)
-        elif choice_option == '2':
-            search_category = input("Enter category (e.g., business, entertainment, general, health, science, sports, technology): ")
-            query_params = {'category': search_category}
-            data_news = transmitRequest(socket_client, f'get_news|top-headlines|{json.dumps(query_params)}')
-            displayResults(data_news)
-        elif choice_option == '3':
-            search_country = input("Enter country code (e.g., au, nz, ca, ae, sa, gb, us, eg, ma): ")
-            query_params = {'country': search_country}
-            data_news = transmitRequest(socket_client, f'get_news|top-headlines|{json.dumps(query_params)}')
-            displayResults(data_news)
-        elif choice_option == '4':
-            data_news = transmitRequest(socket_client, 'get_news|top-headlines|{}')
-            displayResults(data_news)
-        elif choice_option == '5':
-            break
-        else:
-            print("Invalid input. Please enter again.")
+
+    if choice_option == '5':
+      break
 
 def retrieveSourcesList(socket_client):
   while True:
