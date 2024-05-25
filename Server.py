@@ -4,7 +4,7 @@ import requests
 import json
 
 
-API_KEY_NEWS = '----'
+API_KEY_NEWS = 'b9221b54e43c4adeaef44036df9c021e'
 URL_BASE = 'https://newsapi.org/v2/'
 ADDRESS_HOST = '127.0.0.1'
 NUMBER_PORT = 65432
@@ -23,7 +23,7 @@ def storeFormattedData(project_id, username_client, option_type, content_data):
         json.dump(content_data, file)
 
 def processClientRequest(socket_client, address):
-  print(f"Accepted connection from {address}")
+   print(f"Accepted connection from {address}")
   try:
     username_client = socket_client.recv(1024).decode('utf-8')
     print(f"Client name: {username_client}")
@@ -31,14 +31,6 @@ def processClientRequest(socket_client, address):
       client_request = socket_client.recv(1024).decode('utf-8')
       if not client_request:
           break
-      print(f"Requester: {username_client}, Request: {client_request}")
-      if client_request.startswith('get_news'):
-          _, api_endpoint, json_params = client_request.split('|', 2)
-          query_params = json.loads(json_params)
-          news_content = fetchNews(api_endpoint, query_params)
-
-      else:
-          error_message = json.dumps({'
     except ConnectionResetError:
         pass
     finally:
