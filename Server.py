@@ -1,10 +1,27 @@
 import socket
 import threading
 import requests
+import json
+import os
 
+API_KEY_NEWS = 'b9221b54e43c4adeaef44036df9c021e'
+# print (API_KEY_NEWS)
+URL_BASE = 'https://newsapi.org/v2/'
 ADDRESS_HOST = '127.0.0.1'
 NUMBER_PORT = 65432
 
+def fetchNews(api_endpoint, query_params):
+  query_params['apiKey'] = API_KEY_NEWS
+  api_response = requests.get(URL_BASE + api_endpoint, params=query_params)
+  if api_response.status_code == 200:
+    return api_response.json()
+  else:
+    return {'status': 'error', 'message': 'Unable to fetch data'}
+
+def storeFormattedData(project_id, username_client, option_type, content_data):
+  file_path = f"{project_id}{username_client}{option_type}.json"
+  with open(file_path, 'w') as file:
+    json.dump(content_data, file)
 def processClientRequest(socket_client, address):
   print(f"Accepted connection from {address}")
   try:
