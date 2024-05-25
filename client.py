@@ -15,6 +15,17 @@ def transmitRequest(socket_client, request_message):
     part_data = socket_client.recv(length_response - len(data_response))
     data_response += part_data
   return json.loads(data_response.decode('utf-8'))
+def searchNewsHeadlines(socket_client):
+
+
+def retrieveSourcesList(socket_client):
+
+
+def displayResults(data_news):
+
+
+def displaySources(data_sources):
+
 
 def main():
   username_client = input("Enter your name: ")
