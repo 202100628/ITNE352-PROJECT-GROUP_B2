@@ -23,7 +23,22 @@ def main():
   socket_client.send(username_client.encode('utf-8'))
 
   while True:
-    pass
+    print("Main menu:")
+    print("1. Search headlines")
+    print("2. List of sources")
+    print("3. Quit")
+    choice_option = input("Select an option: ")
+
+    if choice_option == '1':
+
+      searchNewsHeadlines(socket_client)
+    elif choice_option == '2':
+
+      retrieveSourcesList(socket_client)
+    elif choice_option == '3':
+      break
+    else:
+      print("Invalid input. Please enter again.")
 
   socket_client.close()
 
