@@ -18,25 +18,70 @@ def transmitRequest(socket_client, request_message):
     return json.loads(data_response.decode('utf-8'))
 
 def searchNewsHeadlines(socket_client):
-  while True:
-    print("Search headlines menu:")
-    print("1. Search for keywords")
-    print("2. Search by category")
-    print("3. Search by country")
-    print("4. List all new headlines")
-    print("5. Back to the main menu")
-    choice_option = input("Select an option: ")
+    while True:
+        print("Search headlines menu:")
+        print("1. Search for keywords")
+        print("2. Search by category")
+        print("3. Search by country")
+        print("4. List all new headlines")
+        print("5. Back to the main menu")
+        choice_option = input("Select an option: ")
 
-
-    if choice_option == '5':
-      break
+        if choice_option == '1':
+            search_keyword = input("Enter keyword: ")
+            query_params = {'q': search_keyword}
+            data_news = transmitRequest(socket_client, f'get_news|everything|{json.dumps(query_params)}')
+            displayResults(data_news)
+        elif choice_option == '2':
+            search_category = input("Enter category (e.g., business, entertainment, general, health, science, sports, technology): ")
+            query_params = {'category': search_category}
+            data_news = transmitRequest(socket_client, f'get_news|top-headlines|{json.dumps(query_params)}')
+            displayResults(data_news)
+        elif choice_option == '3':
+            search_country = input("Enter country code (e.g., au, nz, ca, ae, sa, gb, us, eg, ma): ")
+            query_params = {'country': search_country}
+            data_news = transmitRequest(socket_client, f'get_news|top-headlines|{json.dumps(query_params)}')
+            displayResults(data_news)
+        elif choice_option == '4':
+            data_news = transmitRequest(socket_client, 'get_news|top-headlines|{}')
+            displayResults(data_news)
+        elif choice_option == '5':
+            break
+        else:
+            print("Invalid input. Please enter again.")
 
 def retrieveSourcesList(socket_client):
-  while True:
-    print("Search headlines menu:")
-    print("1. Search for keywords")
-    print("2. Search by category")
-    print("3. Search by country")
+    while True:
+        print("List of sources menu:")
+        print("1. Search by category")
+        print("2. Search by country")
+        print("3. Search by language")
+        print("4. List all")
+        print("5. Back to the main menu")
+        choice_option = input("Select an option: ")
+
+        if choice_option == '1':
+            search_category = input("Enter category (e.g., business, entertainment, general, health, science, sports, technology): ")
+            query_params = {'category': search_category}
+            data_sources = transmitRequest(socket_client, f'get_news|sources|{json.dumps(query_params)}')
+            displaySources(data_sources)
+        elif choice_option == '2':
+            search_country = input("Enter country code (e.g., au, nz, ca, ae, sa, gb, us, eg, ma): ")
+            query_params = {'country': search_country}
+            data_sources = transmitRequest(socket_client, f'get_news|sources|{json.dumps(query_params)}')
+            displaySources(data_sources)
+        elif choice_option == '3':
+            search_language = input("Enter language code (e.g., ar, en): ")
+            query_params = {'language': search_language}
+            data_sources = transmitRequest(socket_client, f'get_news|sources|{json.dumps(query_params)}')
+            displaySources(data_sources)
+        elif choice_option == '4':
+            data_sources = transmitRequest(socket_client, 'get_news|sources|{}')
+            displaySources(data_sources)
+        elif choice_option == '5':
+            break
+        else:
+            print("Invalid input. Please enter again.")
 
 def displayResults(data_news):
     if data_news['status'] == 'ok':
