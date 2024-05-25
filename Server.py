@@ -2,6 +2,7 @@ import socket
 import threading
 import requests
 import json
+import os
 
 
 API_KEY_NEWS = 'b9221b54e43c4adeaef44036df9c021e'
@@ -23,14 +24,30 @@ def storeFormattedData(project_id, username_client, option_type, content_data):
         json.dump(content_data, file)
 
 def processClientRequest(socket_client, address):
-   print(f"Accepted connection from {address}")
-  try:
-    username_client = socket_client.recv(1024).decode('utf-8')
-    print(f"Client name: {username_client}")
-    while True:
-      client_request = socket_client.recv(1024).decode('utf-8')
-      if not client_request:
-          break
+    print(f"Accepted connection from {address}")
+    try:
+        username_client = socket_client.recv(1024).decode('utf-8')
+        print(f"Client name: {username_client}")
+        while True:
+            client_request = socket_client.recv(1024).decode('utf-8')
+            if not client_request:
+                break
+            print(f"Requester: {username_client}, Request: {client_request}")
+            if client_request.startswith('get_news'):
+                _, api_endpoint, json_params = client_request.split('|', 2)
+                query_params = json.loads(json_params)
+                news_content = fetchNews(api_endpoint, query_params)
+                storeFormattedData("Project-Group-B2", username_client, "get_news", news_content)
+                response_message = json.dumps(news_content).encode('utf-8')
+                response_size = len(response_message)
+                print(f"Sending response length: {response_size}")
+                socket_client.sendall(str(response_size).encode('utf-8').ljust(10))
+                socket_client.sendall(response_message)
+                print("Response sent")
+            else:
+                error_message = json.dumps({'status': 'error', 'message': 'Invalid request'}).encode('utf-8')
+                socket_client.sendall(str(len(error_message)).encode('utf-8').ljust(10))
+                socket_client.sendall(error_message)
     except ConnectionResetError:
         pass
     finally:
