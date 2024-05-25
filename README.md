@@ -28,6 +28,7 @@ Technologies Used:
 •	Multithreading
 •	JSON
 •	RESTful API
+
 Installation:
 1.	Clone the repository:
 ‘’’bash
