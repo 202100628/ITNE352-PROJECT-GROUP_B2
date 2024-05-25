@@ -16,6 +16,20 @@ def transmitRequest(socket_client, request_message):
     data_response += part_data
   return json.loads(data_response.decode('utf-8'))
 def searchNewsHeadlines(socket_client):
+  while True:
+    print("Search headlines menu:")
+    print("1. Search for keywords")
+    print("2. Search by category")
+    print("3. Search by country")
+    print("4. List all new headlines")
+    print("5. Back to the main menu")
+    choice_option = input("Select an option: ")
+
+    # Implement functionalities based on user choice (refer to existing code)
+    # ... (code for handling different search options)
+
+    if choice_option == '5':
+      break
 
 
 def retrieveSourcesList(socket_client):
