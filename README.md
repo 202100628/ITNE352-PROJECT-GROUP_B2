@@ -32,9 +32,9 @@ Technologies Used:
 Installation:
 1.	Clone the repository:
 ‘’’bash
-git clone https://github.com/Maryaam/group-B2.git
+git clone https://github.com/202100628/ITNE352-PROJECT-GROUP_B2 
 cd group-b2
-2.	Navigate to the project directory:
+3.	Navigate to the project directory:
 ‘’’bash
 cd news-client-server
 Install the required packages:
@@ -68,7 +68,9 @@ This project is licensed under the MIT License.
 
 Contact:
 •	Instructor: Dr. Mohammed Almeer (malmeer@uob.edu.bh)
+
 •	Team Members:
+
 •	Maryam Mohammed: 202100628@stu.uob.edu.bh
 •	Aysha Mansoor: 202100815@stu.uob.edu.bh
 
